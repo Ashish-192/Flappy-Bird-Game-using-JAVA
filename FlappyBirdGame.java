@@ -23,8 +23,17 @@ public class FlappyBirdGame extends JPanel implements ActionListener {
     private boolean gameOver = false;
     private int score = 0;
 
-    
+    // Images for the game
+    private Image background;
+    private Image birdImage;
+    private Image pipeImage;
+
     public FlappyBirdGame() {
+        // Load the images
+        background = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/background.png");
+        birdImage = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/bird.png");
+        pipeImage = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/pipe.png");
+
         timer = new Timer(20, this);
         setFocusable(true);
         addKeyListener(new KeyAdapter() {
@@ -56,31 +65,35 @@ public class FlappyBirdGame extends JPanel implements ActionListener {
         score = 0;
         timer.start(); // Restart the timer
     }
-    
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(new Color(60, 90, 255)); // Dark blue background
-        g.fillRect(0, 0, getWidth(), getHeight());
 
-        g.setColor(Color.red);
-        g.fillRect(50, birdY, BIRD_WIDTH, BIRD_HEIGHT);
+        // Draw the background image
+        g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), this);
 
-        g.setColor(Color.green.darker());
-        g.fillRect(pipeX, 0, PIPE_WIDTH, upperPipeY);
-        g.fillRect(pipeX, upperPipeY + PIPE_GAP, PIPE_WIDTH, getHeight() - upperPipeY - PIPE_GAP);
-        
+        // Draw the bird image
+        g.drawImage(birdImage, 50, birdY, BIRD_WIDTH, BIRD_HEIGHT, this);
+
+        // Draw the pipe image
+        g.drawImage(pipeImage, pipeX, 0, PIPE_WIDTH, upperPipeY, this);
+        g.drawImage(pipeImage, pipeX, upperPipeY + PIPE_GAP, PIPE_WIDTH, getHeight() - upperPipeY - PIPE_GAP, this);
+
         if (!gameStarted) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 24));
             g.drawString("Press Space bar to start", getWidth() / 2 - 200, getHeight() / 2);
+        } else {
+            // Draw the bird image during gameplay
+            g.drawImage(birdImage, 50, birdY, BIRD_WIDTH, BIRD_HEIGHT, this);
         }
+    
 
         if (gameOver) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 24));
-            g.drawString("You lose! Score: " + score + " Press R to restart", getWidth() / 2 - 240, getHeight() / 2);
+            g.drawString("You lose! Score: " + score + " Press R to restart", getWidth() / 2 - 180, getHeight() / 2);
         } else {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 24));
