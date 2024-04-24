@@ -30,9 +30,9 @@ public class FlappyBirdGame extends JPanel implements ActionListener {
 
     public FlappyBirdGame() {
         // Load the images
-        background = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/background.png");
-        birdImage = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/bird.png");
-        pipeImage = Toolkit.getDefaultToolkit().getImage("C:/Users/bisht/Downloads/pipe.png");
+        background = Toolkit.getDefaultToolkit().getImage("Path/background.png");
+        birdImage = Toolkit.getDefaultToolkit().getImage("Path/bird.png");
+        pipeImage = Toolkit.getDefaultToolkit().getImage("Path/pipe.png");
 
         timer = new Timer(20, this);
         setFocusable(true);
